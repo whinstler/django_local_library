@@ -42,8 +42,9 @@ class AuthorCreateTest(TestCase):
     def test_forbidden_if_logged_in_but_not_correct_permission(self):
         login = self.client.login(username='testuser1', password='1X<ISRUkw+tuK')
         response = self.client.get(reverse('author-create'))
+        self.assertEqual(str(response.context['user']), 'testuser1')
         self.assertEqual(response.status_code, 403)
-"""
+
     def test_can_mark_returned_uses_correct_template(self):
         login = self.client.login(username='testuser2', password='2HJ1vRV0Z&3iD')
         response = self.client.get(reverse('author-create'))
@@ -55,4 +56,3 @@ class AuthorCreateTest(TestCase):
 
         # Check we used correct template
         self.assertTemplateUsed(response, 'catalog/author_form.html')
-"""
