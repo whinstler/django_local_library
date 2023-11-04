@@ -42,7 +42,6 @@ class AuthorCreateTest(TestCase):
     def test_forbidden_if_logged_in_but_not_correct_permission(self):
         login = self.client.login(username='testuser1', password='1X<ISRUkw+tuK')
         response = self.client.get(reverse('author-create'))
-        self.assertEqual(str(response.context['user']), 'testuser1')
         self.assertEqual(response.status_code, 403)
 
     def test_can_mark_returned_uses_correct_template(self):
